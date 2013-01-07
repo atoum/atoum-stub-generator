@@ -1,0 +1,30 @@
+{
+    "name": "atoum/stubgenerator",
+    "authors": [
+        {
+            "name": "Sébastien Rogier",
+            "email": "sebastien.rogier@pmsipilot.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "atoum/atoum": "dev-master",
+        "symfony/finder": "dev-master",
+        "symfony/filesystem": "dev-master"
+    },
+    "stability": "dev",
+    "bin" : [
+        "bin/generate"
+    ],
+    "scripts": {
+        "post-update-cmd": [
+            "bin/generate"
+        ],
+        "post-install-cmd": [
+            "bin/generate"
+        ]
+    }
+    
+}

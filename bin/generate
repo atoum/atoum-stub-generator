@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Atoum\StubGenerator\Stub;
+
+$atoumDirectory = __DIR__ . '/../vendor/atoum/atoum/';
+$outputDir = __DIR__ . '/../stubs/';
+
+$filesystem = new Symfony\Component\Filesystem\Filesystem();
+
+$finder = new Symfony\Component\Finder\Finder();
+$finder->depth(0);
+$finder->files();
+$finder->in($atoumDirectory . '/classes/asserters');
+$asserters = array();
+foreach ($finder as $file) {
+    /** @var \Symfony\Component\Finder\SplFileInfo $file */
+    list($asserterName,) = explode('.', $file->getFilename());
+    $classname = '\mageekguy\atoum\asserters\\' . $asserterName;
+
+    try {
+        $asserterStub = new Stub\Asserter($filesystem, $asserterName, $classname);
+        $asserterStub->generate($outputDir . '/asserters/');
+
+        $asserters[$asserterName] = $asserterName;
+    } catch (\Exception $e) {
+        
+    }
+}
+
+
+
+$asserterStub = new Stub\Asserter($filesystem, 'asserter', '\mageekguy\atoum\asserter');
+$asserterStub->generate($outputDir);
+
+$testStub = new Stub\Test($filesystem, '\Atoum\StubGenerator\Concrete', $asserters);
+$testStub->generate($outputDir);
+
+
+
