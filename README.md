@@ -13,7 +13,9 @@ composer.phar install
 
 # Generate Stub
 
-```bin/generate```
+```
+bin/generate
+```
 
 Generation is launched after executing ```composer update``` or ```composer.install```
 
