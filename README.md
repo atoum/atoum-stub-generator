@@ -3,6 +3,9 @@ Stub Generator for atoum
 
 This project will generate many stubs to provide completion with IDE.
 
+#DEPRECATED
+Please use https://github.com/atoum/stubs
+
 # Install
 
 ```
